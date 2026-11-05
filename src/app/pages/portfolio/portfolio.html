@@ -1,0 +1,70 @@
+<header class="site-header">
+  <nav class="navbar container" aria-label="Navigation principale">
+    <a class="brand" href="#accueil" (click)="menuOuvert = false"><span class="brand-mark">N</span><span><strong>NYS.</strong><small>Développement Web</small></span></a>
+    <button class="menu-toggle" type="button" (click)="menuOuvert = !menuOuvert" [attr.aria-expanded]="menuOuvert" aria-controls="navigation-principale" [attr.aria-label]="menuOuvert ? 'Fermer le menu' : 'Ouvrir le menu'">{{ menuOuvert ? '✕' : '☰' }}</button>
+    <div id="navigation-principale" class="nav-links" [class.active]="menuOuvert">
+      <a href="#accueil" class="nav-link active" (click)="menuOuvert = false">Accueil</a><a href="#competences" class="nav-link" (click)="menuOuvert = false">Compétences</a><a href="#realisations" class="nav-link" (click)="menuOuvert = false">Réalisations</a><a href="#apropos" class="nav-link" (click)="menuOuvert = false">À propos</a><a href="#contact" class="nav-link" (click)="menuOuvert = false">Contact</a>
+    </div>
+    <a class="nav-cta" href="#contact" (click)="menuOuvert = false">✉ &nbsp; Me contacter</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="accueil">
+    <div class="hero-grid container">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="availability-dot"></span> Disponible pour de nouveaux projets</p>
+        <h1>Je transforme vos idées en <span>solutions digitales.</span></h1>
+        <p class="hero-description">{{ presentation || 'Je conçois des applications web modernes, accessibles et sur mesure, pour transformer vos besoins en solutions concrètes et performantes.' }}</p>
+        <div class="hero-actions"><a href="#realisations" class="button button-primary">Découvrir mes projets <span>↗</span></a><a href="#contact" class="button button-secondary">✉ &nbsp; Me contacter</a></div>
+        <div class="hero-stack"><div><b class="stack-symbol java">J</b><span><strong>Java</strong><small>Backend</small></span></div><div><b class="stack-symbol angular">A</b><span><strong>Angular</strong><small>Frontend</small></span></div><div><b class="stack-symbol database">▤</b><span><strong>MySQL</strong><small>Base de données</small></span></div></div>
+      </div>
+      <div class="hero-visual"><div class="hero-glow"></div><img class="hero-photo" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=85" alt="Ordinateur de développeur affichant du code" fetchpriority="high"><div class="floating-note note-top"><b>&lt;/&gt;</b><span><strong>Code propre</strong><small>Performance &amp; qualité</small></span></div><div class="floating-note note-bottom"><b>✧</b><span><strong>Innovation</strong><small>Des solutions utiles</small></span></div></div>
+      <div class="hero-metrics"><div class="metric"><b>▣</b><span><strong>Responsive</strong><small>Pour tous les écrans</small></span></div><div class="metric"><b>☆</b><span><strong>Projets concrets</strong><small>Du besoin à la solution</small></span></div><div class="metric"><b>◷</b><span><strong>Suivi sérieux</strong><small>Communication claire</small></span></div><div class="metric"><b>◇</b><span><strong>Sur mesure</strong><small>Selon vos objectifs</small></span></div></div>
+    </div>
+  </section>
+
+  <section class="section about-section" id="apropos"><div class="container about-grid">
+    <div class="about-copy"><p class="section-pill">À propos de moi</p><h2>Un développeur à l’écoute de <span>votre activité.</span></h2><p class="section-description">Passionné par le développement informatique, je conçois des applications et des sites web adaptés aux besoins des entreprises, des entrepreneurs et des professionnels.</p>
+      <ul class="promise-list"><li><b>✓</b><p><strong>Écoute :</strong> comprendre votre activité et vos objectifs.</p></li><li><b>✓</b><p><strong>Qualité :</strong> un code structuré et une interface soignée.</p></li><li><b>✓</b><p><strong>Transparence :</strong> un suivi clair à chaque étape du projet.</p></li></ul><div class="signature">NYS.<small>Développeur de solutions numériques</small></div>
+    </div>
+    <div class="about-visual"><span class="visual-frame"></span><img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=85" alt="Espace de collaboration numérique" loading="lazy"><div class="image-sticker"><strong>Des idées</strong><span>aux solutions ↗</span></div><div class="image-caption"><span><b>01</b><small>Concevoir</small></span><span><b>02</b><small>Développer</small></span><span><b>03</b><small>Améliorer</small></span></div></div>
+  </div></section>
+
+  <section class="section services-section" id="services"><div class="container"><div class="section-heading"><div><p class="section-pill">Mes services</p><h2>Des solutions web adaptées à vos besoins</h2></div><a class="subtle-link" href="#contact">Parlons de votre besoin ↗</a></div><p class="section-description services-intro">Des outils numériques utiles pour développer votre activité et votre présence en ligne.</p>
+    <div class="services-grid">
+      <article class="service-card"><span>▣</span><h3>Site vitrine</h3><p>Présentez votre entreprise, votre activité et vos coordonnées.</p><a href="#contact">En savoir plus →</a></article>
+      <article class="service-card"><span>🛒</span><h3>Site e-commerce</h3><p>Présentez vos produits et préparez leur vente en ligne.</p><a href="#contact">En savoir plus →</a></article>
+      <article class="service-card"><span>⌘</span><h3>Application web</h3><p>Des fonctionnalités conçues autour de vos processus.</p><a href="#contact">En savoir plus →</a></article>
+      <article class="service-card"><span>⚒</span><h3>Maintenance</h3><p>Gardez votre site à jour, fiable et fonctionnel.</p><a href="#contact">En savoir plus →</a></article>
+      <article class="service-card"><span>▯</span><h3>Responsive</h3><p>Une expérience adaptée au mobile, à la tablette et au PC.</p><a href="#contact">En savoir plus →</a></article>
+      <article class="service-card"><span>✦</span><h3>Design personnalisé</h3><p>Une interface cohérente avec votre image et vos objectifs.</p><a href="#contact">En savoir plus →</a></article>
+    </div>
+  </div></section>
+
+  <section class="section skills-section" id="competences"><div class="container skills-layout">
+    <div class="skills-copy"><p class="section-pill">Mes compétences</p><h2>Un éventail de technologies <span>pour vos projets.</span></h2><p class="section-description">Les outils et langages que j’utilise pour construire des solutions robustes, maintenables et évolutives.</p><a href="#realisations" class="button button-primary">Voir mes réalisations ↗</a></div>
+    <div class="technology-panel"><div class="panel-heading">STACK TECHNIQUE <span class="live-dot"></span></div><div class="technology-grid">
+      @for (competence of competences; track competence.id) { <article class="technology-item"><span class="tech-symbol">{{ competence.nom.slice(0, 1) }}</span><span><strong>{{ competence.nom }}</strong><small>{{ competence.categorie }}</small></span></article> }
+      @if (competences.length === 0) { <p class="empty-state">Les compétences ajoutées depuis l’espace administrateur apparaîtront ici.</p> }
+    </div></div>
+  </div></section>
+
+  <section class="section projects-section" id="realisations"><div class="container">
+    <div class="section-heading projects-heading"><div><p class="section-pill">Mes réalisations</p><h2>Des projets qui font la différence</h2><p class="section-description">Quelques projets personnels et professionnels.</p></div><span class="project-count">{{ realisations.length }} projet(s)</span></div>
+    <div class="projects-grid">
+      @for (projet of realisations; track projet.numero) { <article class="project-card"><div class="project-cover"><span class="project-type">{{ projet.categorie }}</span><div class="project-art"><span>&lt;</span><strong>NYS</strong><span>/&gt;</span></div><span class="project-number">{{ projet.numero }}</span></div><div class="project-content"><h3>{{ projet.titre }}</h3><p>{{ projet.description }}</p><div class="project-tags">{{ projet.technologies }}</div><button type="button" class="project-link" (click)="voirProjet(projet)" [attr.aria-label]="'Voir les détails de ' + projet.titre">Voir le projet ↗</button></div></article> }
+      @if (realisations.length === 0) { <div class="empty-projects"><span>✦</span><h3>De nouveaux projets arrivent.</h3><p>Les réalisations ajoutées depuis ton espace administrateur apparaîtront ici.</p><a href="#contact" class="subtle-link">Discutons de votre projet ↗</a></div> }
+    </div>
+  </div></section>
+
+  @if (projetSelectionne; as projet) {
+    <div class="project-modal-backdrop" (click)="fermerProjet()"><section class="project-modal" role="dialog" aria-modal="true" [attr.aria-label]="'Détails du projet ' + projet.titre" (click)="$event.stopPropagation()">
+      <button type="button" class="modal-close" (click)="fermerProjet()" aria-label="Fermer">✕</button><p class="section-pill">Projet {{ projet.numero }}</p><h2>{{ projet.titre }}</h2><p>{{ projet.details }}</p><h3>Fonctionnalités</h3><ul>@for (fonctionnalite of projet.fonctionnalites; track fonctionnalite) { <li>{{ fonctionnalite }}</li> }</ul><p class="modal-technologies">Technologies : {{ projet.technologies }}</p>
+      @if (projet.github && projet.github !== 'https://github.com/') { <a class="button button-primary" [href]="projet.github" target="_blank" rel="noopener noreferrer">Consulter le code source ↗</a> }
+    </section></div>
+  }
+
+  <section class="contact-banner" id="contact"><div class="container contact-inner"><div class="contact-mark">↗</div><div class="contact-copy"><h2>Prêt à donner vie à votre projet ?</h2><p>Discutons de vos idées et trouvons ensemble la solution la mieux adaptée à votre activité.</p></div><a class="button button-primary" href="mailto:nguissistive@gmail.com">✉ &nbsp; Me contacter ↗</a></div></section>
+</main>
+<footer class="site-footer"><div class="container footer-main"><a class="brand" href="#accueil"><span class="brand-mark">N</span><span><strong>NYS.</strong><small>Développement Web</small></span></a><p>Développer aujourd’hui, construire demain.</p><nav class="footer-links"><a href="#accueil">Accueil</a><a href="#apropos">À propos</a><a href="#services">Services</a><a href="#competences">Compétences</a><a href="#realisations">Réalisations</a><a href="#contact">Contact</a></nav></div><div class="container footer-bottom"><span>© 2026 NYS. Tous droits réservés.</span><span>Conçu avec soin et volonté de progresser.</span></div></footer>

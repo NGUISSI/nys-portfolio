@@ -1,0 +1,373 @@
+
+<div class="admin-layout">
+
+  <aside class="admin-sidebar">
+    <a routerLink="/" class="admin-logo">NYS<span>.</span></a>
+
+    <p class="sidebar-label">ESPACE ADMINISTRATEUR</p>
+
+    <nav>
+      <a routerLink="/admin" class="sidebar-link active">
+        <span>▦</span> Tableau de bord
+      </a>
+
+      <a routerLink="/admin" fragment="projets" class="sidebar-link">
+        <span>▤</span> Mes projets
+      </a>
+
+      <a routerLink="/admin" fragment="competences" class="sidebar-link">
+        <span>◇</span> Compétences
+      </a>
+    </nav>
+
+    <a routerLink="/" class="back-to-site">← Retour au portfolio</a>
+  </aside>
+
+  <main class="admin-main">
+
+    <header class="admin-header">
+      <div>
+        <p class="admin-eyebrow">VOTRE ESPACE DE TRAVAIL</p>
+        <h1>Tableau de bord</h1>
+        <p>Bienvenue dans l'administration de votre portfolio.</p>
+      </div>
+
+      <a routerLink="/" class="view-site">Voir mon site ↗</a>
+    </header>
+
+    <section class="stats-grid">
+      <article class="stat-card">
+        <span>Projets</span>
+        <strong>{{ projets.length }}</strong>
+        <p>Projets présentés</p>
+      </article>
+
+      <article class="stat-card">
+        <span>Compétences</span>
+        <strong>{{ competences.length }}</strong>
+        <p>Technologies affichées</p>
+      </article>
+
+      <article class="stat-card">
+        <span>Visites</span>
+        <strong>—</strong>
+        <p>Statistiques à connecter</p>
+      </article>
+    </section>
+      
+    <section class="admin-panel" id="projets">
+
+      <div class="panel-heading">
+        <div>
+          <h2>Mes projets</h2>
+          <p>Retrouve ici les réalisations de ton portfolio.</p>
+        </div>
+
+        <button type="button" class="add-project" (click)="ouvrirFormulaire()">
+          + Ajouter un projet
+        </button>
+      </div>
+
+      
+        @if (formulaireOuvert) {
+          <form
+            class="project-form"
+            #formProjet="ngForm"
+            (ngSubmit)="modeEdition ? enregistrerModification() : ajouterProjet()"
+          >
+            <h3>{{ modeEdition ? 'Modifier le projet' : 'Nouveau projet' }}</h3>
+            <p class="form-description">
+              Les champs marqués d'un astérisque sont obligatoires.
+            </p>
+
+            <div class="form-grid">
+              <label>
+                Titre *
+                <input
+                  type="text"
+                  name="titre"
+                  [(ngModel)]="nouveauProjet.titre"
+                  required
+                  maxlength="100"
+                  placeholder="Ex. Application de gestion"
+                />
+              </label>
+
+              <label>
+                Catégorie *
+                <input
+                  type="text"
+                  name="categorie"
+                  [(ngModel)]="nouveauProjet.categorie"
+                  required
+                  maxlength="100"
+                  placeholder="Ex. Application web"
+                />
+              </label>
+
+              <label class="form-full">
+                Description courte *
+                <textarea
+                  name="description"
+                  [(ngModel)]="nouveauProjet.description"
+                  required
+                  maxlength="300"
+                  rows="3"
+                  placeholder="Présente brièvement le projet"
+                ></textarea>
+              </label>
+
+              <label class="form-full">
+                Technologies *
+                <input
+                  type="text"
+                  name="technologies"
+                  [(ngModel)]="nouveauProjet.technologies"
+                  required
+                  maxlength="200"
+                  placeholder="Angular · Java · MySQL"
+                />
+              </label>
+
+              <label class="form-full">
+                Description détaillée
+                <textarea
+                  name="details"
+                  [(ngModel)]="nouveauProjet.details"
+                  rows="3"
+                  placeholder="Explique l'objectif du projet"
+                ></textarea>
+              </label>
+
+              <label class="form-full">
+                Fonctionnalités
+                <textarea
+                  name="fonctionnalites"
+                  [(ngModel)]="nouveauProjet.fonctionnalitesTexte"
+                  rows="4"
+                  placeholder="Une fonctionnalité par ligne"
+                ></textarea>
+              </label>
+
+              <label class="form-full">
+                Lien GitHub
+                <input
+                  type="url"
+                  name="github"
+                  [(ngModel)]="nouveauProjet.github"
+                  placeholder="https://github.com/..."
+                />
+              </label>
+            </div>
+
+            <div class="form-actions">
+              <button
+                type="button"
+                class="cancel-button"
+                (click)="annulerFormulaire()"
+              >
+                Annuler
+              </button>
+
+              <button
+                type="submit"
+                class="add-project"
+                [disabled]="formProjet.invalid"
+              >
+                {{ modeEdition ? 'Enregistrer les modifications' : 'Enregistrer le projet' }}
+              </button>
+            </div>
+          </form>
+        }
+
+
+      <div class="admin-projects-list">
+
+        @for (projet of projets; track projet.numero) {
+          <article class="admin-project-item">
+
+            <div class="admin-project-info">
+              <span class="admin-project-number">
+                {{ projet.numero }}
+              </span>
+
+              <div>
+                <h3>{{ projet.titre }}</h3>
+                <p>{{ projet.categorie }}</p>
+                <small>{{ projet.technologies }}</small>
+              </div>
+            </div>
+
+            <div class="project-actions">
+      <button
+        type="button"
+        class="edit-project"
+        (click)="modifierProjet(projet)"
+      >
+        Modifier
+      </button>
+
+      <button
+        type="button"
+        class="delete-project"
+        (click)="supprimerProjet(projet.numero)"
+      >
+        Supprimer
+      </button>
+    </div>
+
+          </article>
+        } @empty {
+          <p class="empty-projects">
+            Aucun projet pour le moment.
+          </p>
+        }
+
+      </div>
+
+    </section>
+
+    
+<section class="admin-panel" id="competences">
+
+  <div class="panel-heading">
+    <div>
+      <h2>Mes compétences</h2>
+      <p>Gère les technologies et les compétences présentées sur ton portfolio.</p>
+    </div>
+
+    <button
+      type="button"
+      class="add-project"
+      (click)="ouvrirFormulaireCompetence()"
+    >
+      + Ajouter une compétence
+    </button>
+  </div>
+
+  @if (formulaireCompetenceOuvert) {
+    <form
+      class="project-form"
+      #formCompetence="ngForm"
+      (ngSubmit)="enregistrerCompetence()"
+    >
+      <h3>
+        {{ modeEditionCompetence ? 'Modifier la compétence' : 'Nouvelle compétence' }}
+      </h3>
+
+      <div class="form-grid">
+        <label>
+          Nom de la compétence *
+          <input
+            type="text"
+            name="nomCompetence"
+            [(ngModel)]="nouvelleCompetence.nom"
+            required
+            maxlength="80"
+            placeholder="Ex. Java"
+          />
+        </label>
+
+        <label>
+          Catégorie *
+          <select
+            name="categorieCompetence"
+            [(ngModel)]="nouvelleCompetence.categorie"
+            required
+          >
+            <option value="" disabled>Choisir une catégorie</option>
+            <option value="Programmation">Programmation</option>
+            <option value="Développement web">Développement web</option>
+            <option value="Frameworks">Frameworks</option>
+            <option value="Bases de données">Bases de données</option>
+            <option value="Réseaux">Réseaux</option>
+            <option value="Outils">Outils informatiques</option>
+            <option value="Autre">Autre</option>
+          </select>
+        </label>
+
+        <label>
+          Niveau *
+          <select
+            name="niveauCompetence"
+            [(ngModel)]="nouvelleCompetence.niveau"
+            required
+          >
+            <option value="Débutant">Débutant</option>
+            <option value="Intermédiaire">Intermédiaire</option>
+            <option value="Avancé">Avancé</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="form-actions">
+        <button
+          type="button"
+          class="cancel-button"
+          (click)="annulerFormulaireCompetence()"
+        >
+          Annuler
+        </button>
+
+        <button
+          type="submit"
+          class="add-project"
+          [disabled]="formCompetence.invalid"
+        >
+          {{ modeEditionCompetence ? 'Enregistrer les modifications' : 'Enregistrer la compétence' }}
+        </button>
+      </div>
+    </form>
+  }
+
+  <div class="admin-projects-list">
+
+    @for (competence of competences; track competence.id) {
+      <article class="admin-project-item">
+
+        <div class="admin-project-info">
+          <span class="admin-project-number">◇</span>
+
+          <div>
+            <h3>{{ competence.nom }}</h3>
+            <p>{{ competence.categorie }}</p>
+            <small>Niveau : {{ competence.niveau }}</small>
+          </div>
+        </div>
+
+        <div class="project-actions">
+          <button
+            type="button"
+            class="edit-project"
+            (click)="modifierCompetence(competence)"
+          >
+            Modifier
+          </button>
+
+          <button
+            type="button"
+            class="delete-project"
+            (click)="supprimerCompetence(competence.id)"
+          >
+            Supprimer
+          </button>
+        </div>
+
+      </article>
+    } @empty {
+      <p class="empty-projects">
+        Aucune compétence enregistrée pour le moment.
+      </p>
+    }
+
+  </div>
+
+</section>
+
+<button type="button" (click)="deconnecter()">
+  Déconnexion
+</button>
+
+
+  </main>
+</div>
